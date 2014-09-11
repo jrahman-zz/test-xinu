@@ -2,15 +2,12 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main() {
-	char dir[4096];
-	char* home = getenv("HOME");
-	if(home == NULL) {
-		fprintf(stderr, "Couldn't get user home directory!\n");
+int main(int argc, char* argv[]) {
+	if(argc != 2) {
+		printf("usage: test-xinu <xinu code directory>\n");
 		return EXIT_FAILURE;
 	}
-	sprintf(dir, "%s/%s", home, "xinu-14Fall-lab0-linksys/compile");
-	int status = chdir(dir);
+	int status = chdir(argv[1]);
 	if(status != 0) {
 		fprintf(stderr, "Couldn't change directory to compile!\n");
 		return EXIT_FAILURE;
