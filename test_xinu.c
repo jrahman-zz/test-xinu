@@ -1,13 +1,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 int main(int argc, char* argv[]) {
 	if(argc != 2) {
 		printf("usage: test-xinu <xinu code directory>\n");
 		return EXIT_FAILURE;
 	}
-	int status = chdir(argv[1]);
+	char* compile_dir = "compile";
+	char* dir = malloc(strlen(argv[1]) + strlen(compile_dir));
+	if(dir == NULL) {
+		fprintf(stderr, "Couldn't allocate space for xinu code directory name!\n");
+		return EXIT_FAILURE;
+	}
+	sprintf(dir, "%s/%s", argv[1], compile_dir);
+	int status = chdir(dir);
+	free(dir);
 	if(status != 0) {
 		fprintf(stderr, "Couldn't change directory to compile!\n");
 		return EXIT_FAILURE;
