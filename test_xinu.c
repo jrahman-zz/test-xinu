@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 	char* compile_dir = "compile";
-	char* dir = malloc(strlen(argv[1]) + strlen(compile_dir));
+	char* dir = malloc(strlen(argv[1]) + strlen(compile_dir) + 2);
 	if(dir == NULL) {
 		fprintf(stderr, "Couldn't allocate space for xinu code directory name!\n");
 		return EXIT_FAILURE;
